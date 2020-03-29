@@ -6,6 +6,6 @@ services:
         image: scrapingUltimaHora
         container_name: scrapingUltimaHora
         ports:
-            - '5555:5000'
+            - '5005:5000'
         volumes:
             - ./src:/app
