@@ -1,4 +1,10 @@
-.prueba{
-    color: red;
-    background-color: red;
+.todo{
+    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    text-align: right;
+}
+
+.imagen{
+    max-width:90%;
 }

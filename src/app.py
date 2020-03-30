@@ -4,31 +4,24 @@ from flask import render_template
 from flask import request
 from flask import redirect
 from flask import url_for
-
-# modulo Scraping
-import modulos.scraping as scrap
-# modulo Base de datos
-import modulos.mongodb as mongo
-
-# Python
+from pymongo import MongoClient
+import modulos.mongo as mongo
 import os
 
-# Mongo
-from pymongo import MongoClient
 
 # Iniciando FLASK
 app = Flask(__name__)
 app.secret_key = 'Quedate en tu casa que mira que es facil'
 
 
-
 # RUTAS 
 @app.route('/', methods=['GET', 'POST'])
 def inicio():
-    if request.method == 'POST':
-        nombre = request.form.get('nombre')
-        mongo.collection.insert_one({'nombre': nombre})
-    return render_template('index.html')
+    busqueda = list(mongo.collection.find({}))
+    lista = []
+    for i in busqueda:
+        lista.append([i['titulo'], i['descripcion'], i['alquiler'], i['precio'], i['img']])
+    return render_template('index.html', lista=lista)
 
 
 if __name__ == "__main__":
